@@ -126,18 +126,18 @@ body {
 }
 
 .slider::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0); /* Fundo do scrollbar */
+  background-color: rgb(3, 255, 4); /* Fundo do scrollbar */
   border-radius: 14px; /* Arredondamento do fundo */
 }
 
 .slider::-webkit-scrollbar-thumb {
-  background-color: #ffffff; /* Cor da parte que se move */
+  background-color: rgb(255, 109, 0); /* Cor da parte que se move */
   border-radius: 10px; /* Arredondamento */
-  border: 5px solid rgba(225, 225, 225, 0); /* Espaço ao redor para parecer mais largo */
+  border: 5px solid rgba(253, 0, 0, 0); /* Espaço ao redor para parecer mais largo */
 }
 
 .slider::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 74, 8, 0); /* Cor mais escura ao passar o mouse */
+  background-color: rgba(237, 49, 24, 0.89); /* Cor mais escura ao passar o mouse */
 }
 
 
