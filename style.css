@@ -23,8 +23,9 @@ h2 {
 
 
 body {
-  margin: 0; /* Remove margem padrão */
-  padding: 0; /* Remove padding padrão */
+  
+  margin: 1; /* Remove margem padrão */
+  padding: 67; /* Remove padding padrão */
   background: url('your-animation.gif') no-repeat center center fixed;
   background-size: cover; /* Faz o GIF preencher toda a tela */
   font-family: "Bangers", serif;
