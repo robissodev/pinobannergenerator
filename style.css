@@ -5,19 +5,19 @@ h1 {
   display: center;
   position: relative;
   justify-content: center;
-  margin: 1;
-  font-size: clamp(36px, 8vw, 107px); /* Adapta entre 36px e 107px */
+  margin: 0;
+  font-size: clamp(10px, 8vw, 100px); /* Adapta entre 36px e 107px */
       
 }
 
 h3 {
-  font-size: clamp(13px, 8vw, 50px); /* Adapta entre 36px e 107px */
+  font-size: clamp(13px, 8vw, 20px); /* Adapta entre 36px e 107px */
   
 }
 
 
 h2 {
-  font-size: clamp(13px, 8vw, 50px); /* Aumenta o tamanho das categorias */
+  font-size: clamp(13px, 8vw, 30px); /* Aumenta o tamanho das categorias */
 }
 
 
@@ -46,8 +46,8 @@ body {
 
 .avatar-display {
   
-  width: 500px;
-  height: 500px;
+  width: 250px;
+  height: 250px;
   display: flex;
   justify-content: center;
   border-radius: 56px;
@@ -82,8 +82,8 @@ body {
 .options {
   
   justify-content: center;
-  gap: 22px;
-  width: 826%; /* Para garantir que as opções ocupem toda a largura disponível */
+  gap: 1px;
+  width: 632%; /* Para garantir que as opções ocupem toda a largura disponível */
 }
 
 .options button {
@@ -91,7 +91,7 @@ body {
   
   width: 100px;
   height: 100px;
-  border: 2px solid #ddd;
+  border: 3px solid #ddd;
   margin: -5px;
   position: relative;
   cursor: pointer;
