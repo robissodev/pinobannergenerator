@@ -39,6 +39,9 @@ body {
 
 .container {
   text-align: center;
+  justify-content: center;
+  overflow: hidden;
+  
 }
 
 .avatar-display {
