@@ -23,7 +23,7 @@ h2 {
 
 
 body {
-  
+  display: flex;
   margin: 1; /* Remove margem padrão */
   padding: 67; /* Remove padding padrão */
   background: url('your-animation.gif') no-repeat center center fixed;
