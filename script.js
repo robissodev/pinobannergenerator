@@ -231,34 +231,25 @@ function setDefaultAvatar() {
 }
 
 
-downloadBtn.addEventListener('click', async () => {
-  try {
-    // Remove bordas arredondadas temporariamente
+document.getElementById('download-btn').addEventListener('click', async () => {
+  
+  // Remove bordas arredondadas temporariamente
     const avatarDisplay = document.getElementById('avatar-display');
     const previousBorderRadius = avatarDisplay.style.borderRadius; // Salva o estilo atual
     avatarDisplay.style.borderRadius = '0'; // Remove o arredondamento
+  
 
-    // Cria o canvas e captura a imagem
-    const canvas = document.createElement('canvas');
-    canvas.width = 1000;
-    canvas.height = 1000;
+    // Cria um canvas com html2canvas
+    const canvas = await html2canvas(avatarDisplay, { scale: 2 }); // Escala maior para alta resolução
+    const dataURL = canvas.toDataURL('image/png');
 
-    const ctx = canvas.getContext('2d');
-    const avatarClone = await html2canvas(avatarDisplay, { useCORS: true });
-    ctx.drawImage(avatarClone, 0, 0, canvas.width, canvas.height);
-
-    // Gera o link de download
-    const imageUrl = canvas.toDataURL('image/png');
+    // Cria o link de download
     const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = 'PinoPFP.png';
+    link.href = dataURL;
+    link.download = 'HighResolutionImage.png'; // Nome do arquivo
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-    // Restaura o estilo de borda arredondada
-    avatarDisplay.style.borderRadius = previousBorderRadius;
-  } catch (error) {
-    console.error("Error capturing and downloading the image:", error);
-  }
 });
+
+  

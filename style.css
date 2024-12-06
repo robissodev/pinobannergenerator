@@ -1,5 +1,5 @@
 h1 {
-  font-size: 95px; /* Increases the font size of the main title */
+  font-size: 79px; /* Increases the font size of the main title */
   color: #fff;
   background-color: #000000;
   box-shadow: -17px 16px 6px rgba(0, 0, 0, 0.3);
@@ -8,19 +8,22 @@ h1 {
   align-items: center;
 }
 
-h2, h3 {
-  font-size: 59px; /* Aumenta o tamanho das categorias */
+h3 {
+  font-size: 26px; /* Aumenta o tamanho das categorias */
+}
+h2 {
+  font-size: 46px; /* Aumenta o tamanho das categorias */
 }
 
 body {
   font-family: "Bangers", serif;
-  font-weight: 400;
+  font-weight: 440;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
   background-color: #f7ca16;
-  font-size: 24px;
+  font-size: 14px;
 }
 
 .container {
@@ -28,8 +31,9 @@ body {
 }
 
 .avatar-display {
-  width: 1000px;
-  height: 1000px;
+  
+  width: 500px;
+  height: 500px;
   display: flex;
   justify-content: center;
   border-radius: 56px;
@@ -64,7 +68,7 @@ body {
 .options {
   
   justify-content: center;
-  gap: 40px;
+  gap: 22px;
   width: 826%; /* Para garantir que as opções ocupem toda a largura disponível */
 }
 
@@ -74,14 +78,14 @@ body {
   width: 100px;
   height: 100px;
   border: 2px solid #ddd;
-  margin: 2px;
+  margin: -5px;
   position: relative;
   cursor: pointer;
   background-image: url('images/default/default_pino.png'); /* Avatar padrão */
   background-size: cover;
   background-position: center;
   overflow: hidden; /* Garante que nada fora do botão apareça */
-   border-radius: 11px;
+   border-radius: 32px;
   background-color: transparent;
 }
 
@@ -166,8 +170,8 @@ button.next {
 
 #generate-btn, #default-btn, #download-btn {
   font-family: "Bangers", serif;
-  padding: 39px 20px; /* Ajuste no padding dos botões */
-  font-size: 50px; /* Tamanho da fonte dos botões */
+  padding: 3px 42px; /* Ajuste no padding dos botões */
+  font-size: 26px; /* Tamanho da fonte dos botões */
   border: none; /* Remove a borda padrão dos botões */
   border-radius: 8px; /* Borda arredondada para os botões */
   cursor: pointer; /* Aplica o cursor de "mãozinha" ao passar sobre o botão */
