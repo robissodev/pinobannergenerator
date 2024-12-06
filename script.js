@@ -4,6 +4,8 @@ const defaultBtn = document.getElementById('default-btn');
 const downloadBtn = document.getElementById('download-btn');
 const avatarDisplay = document.getElementById('avatar-display');
 const avatarImage = document.getElementById('avatar-image');
+const matrixBackground = document.querySelector('.matrix-background');
+
 
 avatarImage.onerror = function() {
     console.error("Erro ao carregar a imagem:", avatarImage.src);
@@ -246,7 +248,7 @@ document.getElementById('download-btn').addEventListener('click', async () => {
     // Cria o link de download
     const link = document.createElement('a');
     link.href = dataURL;
-    link.download = 'HighResolutionImage.png'; // Nome do arquivo
+    link.download = 'PINOZATION_COMPLETED.png'; // Nome do arquivo
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
