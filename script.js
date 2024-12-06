@@ -248,7 +248,7 @@ document.getElementById('download-btn').addEventListener('click', async () => {
 
   // Capturar o clone com html2canvas
   const canvas = await html2canvas(clone, { scale: 4 });
-  const dataURL = canvas.toDataURL('image/png');
+  const dataURL = canvas.toDataURL('image/jpg');
 
   // Remover o clone do DOM
   document.body.removeChild(clone);
@@ -256,7 +256,7 @@ document.getElementById('download-btn').addEventListener('click', async () => {
   // Criar o link de download
   const link = document.createElement('a');
   link.href = dataURL;
-  link.download = 'PINOZATION_COMPLETED.png';
+  link.download = 'PINOZATION_COMPLETED.jpg';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
