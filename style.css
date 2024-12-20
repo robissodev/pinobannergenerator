@@ -52,7 +52,7 @@ body {
   aspect-ratio: 3 / 1;          /* Maintain a 3:1 aspect ratio (e.g., 1500x500) */
   display: flex;
   justify-content: flex-end;    /* Align avatar to the right */
-  border-radius: 25px;
+  border-radius: 14px;
   margin: auto;
   position: relative;
   overflow: hidden;             /* Clip any overflow */
@@ -197,7 +197,7 @@ button.prev, button.next {
   padding: 10px 20px; /* Ajuste no padding dos botões */
   font-size: 18px; /* Tamanho da fonte dos botões */
   border: none; /* Remove a borda padrão dos botões */
-  border-radius: 37px; /* Borda arredondada para os botões */
+  border-radius: 8px; /* Borda arredondada para os botões */
   cursor: pointer; /* Aplica o cursor de "mãozinha" ao passar sobre o botão */
 }
 
