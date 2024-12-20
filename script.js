@@ -233,6 +233,8 @@ document.getElementById('download-btn').addEventListener('click', async () => {
   // Create a clone of the avatar display
   const clone = avatarDisplay.cloneNode(true);
   clone.style.position = 'absolute';
+  clone.style.margin = '0';
+  clone.style.borderRadius = '0';
   clone.style.top = '-9999px';     // Move it off-screen
   clone.style.left = '-9999px';
   clone.style.width = '1500px';    // Set fixed width
