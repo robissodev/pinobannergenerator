@@ -245,7 +245,7 @@ document.getElementById('download-btn').addEventListener('click', async () => {
     const canvas = await html2canvas(clone, {
       width: 1500,
       height: 500,
-      scale: 2,                // Capture at higher scale for better quality
+      scale: 1,                // Capture at higher scale for better quality
       useCORS: true,           // Handle cross-origin images
       backgroundColor: null,   // Maintain transparency if applicable
     });
