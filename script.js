@@ -221,49 +221,44 @@ function addOrReplaceCategoryImage(category, imgSrc, zIndex = 1) {
   }
 }
 
-// Função de reset, caso o usuário clique em "reset"
-defaultBtn.addEventListener('click', () => {
-  setDefaultAvatar();
-  // Quando o reset é chamado, garantir que o fundo padrão seja aplicado.
-  addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", 0);
-});
-
-// Função para garantir que o avatar tenha um fundo padrão
-function setDefaultAvatar() {
-  document.getElementById('avatar-image').src = "images/default/default_pino.png";
-  document.querySelectorAll('.layer').forEach(layer => layer.remove());
-  addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", 0); // Fundo padrão
-}
-
-
 document.getElementById('download-btn').addEventListener('click', async () => {
-  const avatarDisplay = document.getElementById('avatar-display');
+  const avatarDisplay = document.querySelector('.avatar-display');
 
-  // Criar um clone invisível
+  // Create a clone of the avatar display
   const clone = avatarDisplay.cloneNode(true);
-  clone.style.margin = '0';
-  clone.style.borderRadius = '0';
   clone.style.position = 'absolute';
-  clone.style.top = '-9999px'; // Posicionar fora da tela
+  clone.style.top = '-9999px';     // Move it off-screen
   clone.style.left = '-9999px';
+  clone.style.width = '1500px';    // Set fixed width
+  clone.style.height = '500px';    // Set fixed height
 
-  document.body.appendChild(clone); // Adicionar o clone temporário ao DOM
+  document.body.appendChild(clone); // Add the clone to the DOM
 
-  // Capturar o clone com html2canvas
-  const canvas = await html2canvas(clone, { scale: 4 });
-  const dataURL = canvas.toDataURL('image/png');
+  try {
+    // Capture the clone with html2canvas
+    const canvas = await html2canvas(clone, {
+      width: 1500,
+      height: 500,
+      scale: 1,                // Capture at higher scale for better quality
+      useCORS: true,           // Handle cross-origin images
+      backgroundColor: null,   // Maintain transparency if applicable
+    });
 
-  // Remover o clone do DOM
-  document.body.removeChild(clone);
-
-  // Criar o link de download
-  const link = document.createElement('a');
-  link.href = dataURL;
-  link.download = 'PINOZATION_COMPLETED.png';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+    // Create the download link and trigger download
+    const dataURL = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'PINOZATION_COMPLETED.png';
+    link.click();
+  } catch (error) {
+    console.error('Error capturing the image:', error);
+  } finally {
+    // Clean up the clone
+    document.body.removeChild(clone);
+  }
 });
+
+
 
 
   
