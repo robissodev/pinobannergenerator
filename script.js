@@ -250,7 +250,7 @@ document.getElementById('download-btn').addEventListener('click', async () => {
   document.body.appendChild(clone); // Adicionar o clone temporário ao DOM
 
   // Capturar o clone com html2canvas
-  const canvas = await html2canvas(clone, { scale: 1 });
+  const canvas = await html2canvas(clone, { scale: 4 });
   const dataURL = canvas.toDataURL('image/png');
 
   // Remover o clone do DOM

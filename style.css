@@ -46,8 +46,8 @@ body {
    Avatar Display Styles
    ========================= */
 .avatar-display {
-  width: 1500px;
-  height: 500px;
+  width: 375px;
+  height: 125px;
   display: flex;
   justify-content: flex-end; /* Align to the right */
   border-radius: 14px;
