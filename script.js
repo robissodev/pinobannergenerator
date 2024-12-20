@@ -220,6 +220,12 @@ function addOrReplaceCategoryImage(category, imgSrc, zIndex = 1) {
     return existingImg; // Retorna a imagem existente
   }
 }
+// Função de reset, caso o usuário clique em "reset"
+defaultBtn.addEventListener('click', () => {
+  setDefaultAvatar();
+  // Quando o reset é chamado, garantir que o fundo padrão seja aplicado.
+  addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", 0);
+});
 
 document.getElementById('download-btn').addEventListener('click', async () => {
   const avatarDisplay = document.querySelector('.avatar-display');
