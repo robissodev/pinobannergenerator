@@ -50,18 +50,41 @@ const accessories = {
           'aesthetic (5).png', 'aesthetic (6).png']
 };
 
-// Carrega o avatar e background padrão
+// Set default avatar, background, front layer, and based layer
 function setDefaultAvatar() {
-  // Define o avatar padrão e remove todas as camadas de acessórios
+  // Set the default avatar image
   document.getElementById('avatar-image').src = "images/default/default_pino.png";
-  document.querySelectorAll('.layer').forEach(layer => layer.remove());
-  
-  // Adiciona o fundo padrão
-  addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", 0);
+
+  // Remove all accessory layers except the front and based layers
+  document.querySelectorAll('.layer').forEach(layer => {
+    if (layer.id !== 'front-layer' && layer.id !== 'based-layer') {
+      layer.remove();
+    }
+  });
+
+  // Set the default background
+  addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", -3);
+
+  // Add the default front layer
+  addOrReplaceCategoryImage('front-layer', "images/front/front (1).png", -1);
+
+  // Add the default based layer
+  addOrReplaceCategoryImage('based-layer', "images/based/aesthetic (1).png", -2);
 }
 
-// Carregar o avatar padrão ao iniciar a página
-window.onload = setDefaultAvatar;
+// Call the function on page load
+window.addEventListener('load', setDefaultAvatar);
+
+// Attach the function to the reset button
+document.getElementById('default-btn').addEventListener('click', setDefaultAvatar);
+
+
+// Call the function on page load
+window.addEventListener('load', setDefaultAvatar);
+
+// Attach the function to the reset button
+document.getElementById('default-btn').addEventListener('click', setDefaultAvatar);
+
 
 // Função para adicionar ou substituir uma imagem em uma camada
 function addOrReplaceCategoryImage(category, imgSrc, zIndex = 1) {
