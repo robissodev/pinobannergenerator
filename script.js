@@ -270,13 +270,13 @@ document.querySelectorAll('.layer').forEach(layer => {
   });
 
   // Apply random selections for all categories, including "based" and "cores"
-  if (randomFront) addOrReplaceCategoryImage('front-layer', `images/front/${randomFront}`, 2);
+  if (randomFront) addOrReplaceCategoryImage('front-layer', `images/front/${randomFront}`, 3);
   if (randomHat) addOrReplaceCategoryImage('hat-layer', `images/hats/${randomHat}`, 6);
   if (randomGlasses) addOrReplaceCategoryImage('eye-layer', `images/glasses/${randomGlasses}`, 4);
   if (randomClothes) addOrReplaceCategoryImage('clothes-layer', `images/clothes/${randomClothes}`, 5);
   if (randomMouth) addOrReplaceCategoryImage('mouth-layer', `images/mouth/${randomMouth}`, 7);
-  if (randomBased) addOrReplaceCategoryImage('based-layer', `images/based/${randomBased}`, 1);
-  if (randomCores) addOrReplaceCategoryImage('cores-layer', `images/cores/${randomCores}`, 0);
+  if (randomBased) addOrReplaceCategoryImage('based-layer', `images/based/${randomBased}`, 2);
+  if (randomCores) addOrReplaceCategoryImage('cores-layer', `images/cores/${randomCores}`, 1);
 });
 
 // Function to add or replace a category image in a layer
