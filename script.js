@@ -47,7 +47,7 @@ const accessories = {
           'base (6).png', 'base (7).png', 'base (8).png', 'base (9).png', 'base (10).png', 'base (11).png', 'base (12).png'],
   
   based: [  'aesthetic (2).png', 'aesthetic (3).png', 'aesthetic (4).png', 
-          'aesthetic (5).png', 'aesthetic (6).png']
+          'aesthetic (5).png', 'aesthetic (6).png', 'aesthetic (7).png']
 };
 
 // Set default avatar, background, front layer, and based layer
