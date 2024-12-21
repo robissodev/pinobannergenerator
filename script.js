@@ -145,13 +145,13 @@ document.querySelectorAll('.slider').forEach(slider => {
 // Adiciona eventos de clique para cada opção
 document.querySelectorAll('.front-option').forEach(option => {
   option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('front-layer', `images/front/${option.getAttribute('data-img')}`, 5);
+    addOrReplaceCategoryImage('front-layer', `images/front/${option.getAttribute('data-img')}`, 2);
   });
 });
 
 document.querySelectorAll('.hats-option').forEach(option => {
   option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('hat-layer', `images/hats/${option.getAttribute('data-img')}`, 4);
+    addOrReplaceCategoryImage('hat-layer', `images/hats/${option.getAttribute('data-img')}`, 6);
   });
 });
 
@@ -163,7 +163,7 @@ document.querySelectorAll('.glasses-option').forEach(option => {
 
 document.querySelectorAll('.clothes-option').forEach(option => {
   option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('clothes-layer', `images/clothes/${option.getAttribute('data-img')}`, 3);
+    addOrReplaceCategoryImage('clothes-layer', `images/clothes/${option.getAttribute('data-img')}`, 5);
   });
 });
 
@@ -274,9 +274,9 @@ document.querySelectorAll('.layer').forEach(layer => {
   if (randomHat) addOrReplaceCategoryImage('hat-layer', `images/hats/${randomHat}`, 6);
   if (randomGlasses) addOrReplaceCategoryImage('eye-layer', `images/glasses/${randomGlasses}`, 4);
   if (randomClothes) addOrReplaceCategoryImage('clothes-layer', `images/clothes/${randomClothes}`, 5);
-  if (randomMouth) addOrReplaceCategoryImage('mouth-layer', `images/mouth/${randomMouth}`, 7);
-  if (randomBased) addOrReplaceCategoryImage('based-layer', `images/based/${randomBased}`, 1);
-  if (randomCores) addOrReplaceCategoryImage('cores-layer', `images/cores/${randomCores}`, 0);
+  if (randomMouth) addOrReplaceCategoryImage('mouth-layer', `images/mouth/${randomMouth}`, 6);
+  if (randomBased) addOrReplaceCategoryImage('based-layer', `images/based/${randomBased}`, -1);
+  if (randomCores) addOrReplaceCategoryImage('cores-layer', `images/cores/${randomCores}`, -2);
 });
 
 // Function to add or replace a category image in a layer
