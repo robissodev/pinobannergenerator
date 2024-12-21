@@ -16,7 +16,7 @@ avatarImage.onerror = function() {
 const accessories = {
   front: [  'front (2).png', 'front (4).png', 'front (5).png', 
           'front (6).png', 'front (7).png', 'front (8).png', 'front (9).png', 
-          ],
+        'front (10).png', 'front (11).png', 'front (12).png'],
   
   hats: [  'hat (2).png', 'hat (3).png', 'hat (4).png', 'hat (5).png', 
          'hat (6).png', 'hat (7).png','hat (8).png', 'hat (9).png','hat (10).png',
@@ -44,10 +44,12 @@ const accessories = {
           'mouth (6).png'],
   
   cores: [  'base (2).png', 'base (3).png', 'base (4).png', 'base (5).png', 
-          'base (6).png', 'base (7).png', 'base (8).png', 'base (9).png', 'base (10).png', 'base (11).png', 'base (12).png'],
+          'base (6).png', 'base (7).png', 'base (8).png', 'base (9).png', 
+          'base (10).png', 'base (11).png', 'base (12).png'],
   
-  based: [  'aesthetic (2).png', 'aesthetic (3).png', 'aesthetic (4).png', 
-          'aesthetic (5).png', 'aesthetic (6).png', 'aesthetic (7).png']
+  based: [  'aesthetic (2).png', 'aesthetic (3).png', 'aesthetic (4).png', 'aesthetic (5).png',
+           'aesthetic (6).png', 'aesthetic (7).png', 'aesthetic (8).png', 'aesthetic (9).png', 
+           'aesthetic (10).png', 'aesthetic (11).png', 'aesthetic (12).png']
 };
 
 // Set default avatar, background, front layer, and based layer
@@ -185,6 +187,59 @@ document.querySelectorAll('.based-option').forEach(option => {
   });
 });
 
+
+
+
+// Ensure the watermark layer exists
+function ensureWatermarkLayer() {
+  let watermarkLayer = document.getElementById('watermark-layer');
+  if (!watermarkLayer) {
+    // Create the watermark layer if it doesn't exist
+    watermarkLayer = document.createElement('img');
+    watermarkLayer.src = 'images/default/watermark.png'; // Path to your watermark image
+    watermarkLayer.id = 'watermark-layer';
+    watermarkLayer.classList.add('layer');
+    watermarkLayer.style.zIndex = 10; // Ensure it's on top
+    watermarkLayer.style.position = 'absolute'; // Position as overlay
+    watermarkLayer.style.width = '100%'; // Match avatar display width
+    watermarkLayer.style.height = '100%'; // Match avatar display height
+    watermarkLayer.style.top = '0'; // Align with the top of the avatar display
+    watermarkLayer.style.left = '0'; // Align with the left of the avatar display
+    avatarDisplay.appendChild(watermarkLayer);
+  }
+}
+
+// Function to remove layers but keep specific ones
+function clearLayersExceptBackgroundAndWatermark() {
+  document.querySelectorAll('.layer').forEach(layer => {
+    if (!layer.id.includes('background') && layer.id !== 'watermark-layer') {
+      layer.remove();
+    }
+  });
+}
+
+// Ensure the watermark layer persists after randomization
+generateBtn.addEventListener('click', () => {
+  clearLayersExceptBackgroundAndWatermark();
+  ensureWatermarkLayer();
+});
+
+// Ensure the watermark is present after reset
+defaultBtn.addEventListener('click', () => {
+  setDefaultAvatar();
+  ensureWatermarkLayer();
+});
+
+// Ensure watermark exists on page load
+window.addEventListener('load', () => {
+  setDefaultAvatar();
+  ensureWatermarkLayer();
+});
+
+
+
+
+
 // Event for the randomization button
 generateBtn.addEventListener('click', () => {
   // Function to get a random item with a chance of being null
@@ -202,14 +257,16 @@ generateBtn.addEventListener('click', () => {
   const randomGlasses = getRandomWithChance(accessories.glasses,0);
   const randomClothes = getRandomWithChance(accessories.clothes, 0);
   const randomMouth = getRandomWithChance(accessories.mouth, 0);
-  const randomBased = getRandomWithChance(accessories.based, 0); // No chance to be empty
+  const randomBased = getRandomWithChance(accessories.based, 0.6); // No chance to be empty
   const randomCores = getRandomWithChance(accessories.cores, 0); // No chance to be empty
 
-  // Remove previous layers
-  document.querySelectorAll('.layer').forEach(layer => {
-    if (!layer.id.includes('background')) { // Keep the background layer
-      layer.remove();
-    }
+  // Remove previous layers but keep the background and watermark
+document.querySelectorAll('.layer').forEach(layer => {
+  if (!layer.id.includes('background') && layer.id !== 'watermark-layer') {
+    layer.remove();
+  }
+ 
+    
   });
 
   // Apply random selections for all categories, including "based" and "cores"
