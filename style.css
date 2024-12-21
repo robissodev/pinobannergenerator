@@ -123,8 +123,8 @@ body {
 
 .options button {
   width: 150px;
-  height: 50px;
-  border: 3px solid #ddd;
+  height: 55px;
+  border: 2px solid #de9b00;
   margin: -5px;
   position: relative;
   cursor: pointer;
