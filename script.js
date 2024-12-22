@@ -1,14 +1,13 @@
-// Seleciona os elementos principais
+// Select main elements
 const generateBtn = document.getElementById('generate-btn');
 const defaultBtn = document.getElementById('default-btn');
 const downloadBtn = document.getElementById('download-btn');
 const avatarDisplay = document.getElementById('avatar-display');
 const avatarImage = document.getElementById('avatar-image');
-const matrixBackground = document.querySelector('.matrix-background');
 
-
-avatarImage.onerror = function() {
-    console.error("Erro ao carregar a imagem:", avatarImage.src);
+// Handle image loading errors
+avatarImage.onerror = function () {
+    console.error("Error loading image:", avatarImage.src);
     avatarImage.src = 'images/default/fallback_image.png';
 };
 
@@ -52,299 +51,161 @@ const accessories = {
            'aesthetic (10).png', 'aesthetic (11).png', 'aesthetic (12).png']
 };
 
-// Set default avatar, background, front layer, and based layer
+
+const categoryProbabilities = {
+    front: 0,        // Always include (100% chance)
+    hats: 0.3,       // 70% chance to include
+    glasses: 0.3,    // 50% chance to include
+    clothes: 0.3,    // 90% chance to include
+    mouth: 0.3,      // 80% chance to include
+    cores: 0,        // Always include (100% chance)
+    based: 0.5,         // Always include (100% chance)
+};
+
+// Define zIndex for each category
+const layerZIndex = {
+    background: -3,
+    cores: 1,
+    based: 2,
+    clothes: 5,
+    mouth: 6,
+    glasses: 3,
+    hats: 7,
+    front: 4,
+};
+
+// Function to set default avatar
 function setDefaultAvatar() {
-  // Set the default avatar image
-  document.getElementById('avatar-image').src = "images/default/default_pino.png";
+    avatarImage.src = "images/default/default_pino.png";
 
-  // Remove all accessory layers except the front and based layers
-  document.querySelectorAll('.layer').forEach(layer => {
-    if (layer.id !== 'front-layer' && layer.id !== 'based-layer') {
-      layer.remove();
-    }
-  });
+    // Clear existing layers except background and watermark
+    clearLayersExceptBackgroundAndWatermark();
 
-  // Set the default background
-  addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", -3);
-
-  // Add the default front layer
-  addOrReplaceCategoryImage('front-layer', "images/front/front (2).png", -1);
-
-  // Add the default based layer
-  addOrReplaceCategoryImage('based-layer', "images/based/aesthetic (2).png", -2);
+    // Add default layers
+    addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", -3);
+    addOrReplaceCategoryImage('front-layer', "images/front/front (2).png", -1);
+    addOrReplaceCategoryImage('based-layer', "images/based/aesthetic (2).png", -2);
 }
 
-// Call the function on page load
-window.addEventListener('load', setDefaultAvatar);
-
-// Attach the function to the reset button
-document.getElementById('default-btn').addEventListener('click', setDefaultAvatar);
-
-
-// Call the function on page load
-window.addEventListener('load', setDefaultAvatar);
-
-// Attach the function to the reset button
-document.getElementById('default-btn').addEventListener('click', setDefaultAvatar);
-
-
-// Função para adicionar ou substituir uma imagem em uma camada
-function addOrReplaceCategoryImage(category, imgSrc, zIndex = -2) {
-  let existingImg = document.getElementById(category);
-  
-  if (!existingImg) {
-    const img = document.createElement('img');
-    img.src = imgSrc;
-    img.id = category;
-    img.classList.add('layer');
-    img.style.zIndex = zIndex;
-    avatarDisplay.appendChild(img);
-  } else {
-    existingImg.src = imgSrc;
-  }
-}
-
-// Função para configurar a funcionalidade dos sliders
-function setupSlider(slider, options) {
-  const prevButton = slider.querySelector('.prev');
-  const nextButton = slider.querySelector('.next');
-  const optionsContainer = slider.querySelector('.options');
-  
-  let currentIndex = 0;
-
-  function showOptions() {
-    const allOptions = optionsContainer.children;
-    for (let i = 0; i < allOptions.length; i++) {
-      allOptions[i].style.display = (i >= currentIndex && i < currentIndex + 50) ? 'inline-block' : 'none';
-    }
-  }
-
-  prevButton.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex -= 1;
-      showOptions();
-    }
-  });
-
-  nextButton.addEventListener('click', () => {
-    if (currentIndex < options.length - 4) {
-      currentIndex += 1;
-      showOptions();
-    }
-  });
-
-  showOptions(); // Chamada inicial para mostrar as opções
-}
-
-// Configura os sliders para cada categoria
-document.querySelectorAll('.slider').forEach(slider => {
-  const options = slider.querySelector('.options').children;
-  setupSlider(slider, options);
-});
-
-// Adiciona eventos de clique para cada opção
-document.querySelectorAll('.front-option').forEach(option => {
-  option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('front-layer', `images/front/${option.getAttribute('data-img')}`, 5);
-  });
-});
-
-document.querySelectorAll('.hats-option').forEach(option => {
-  option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('hat-layer', `images/hats/${option.getAttribute('data-img')}`, 4);
-  });
-});
-
-document.querySelectorAll('.glasses-option').forEach(option => {
-  option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('eye-layer', `images/glasses/${option.getAttribute('data-img')}`, 3);
-  });
-});
-
-document.querySelectorAll('.clothes-option').forEach(option => {
-  option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('clothes-layer', `images/clothes/${option.getAttribute('data-img')}`, 3);
-  });
-});
-
-document.querySelectorAll('.mouth-option').forEach(option => {
-  option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('mouth-layer', `images/mouth/${option.getAttribute('data-img')}`, 6);
-  });
-});
-
-// Adiciona eventos para as seleções de cores
-document.querySelectorAll('.cores-option').forEach(option => {
-  option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('cores-layer', `images/cores/${option.getAttribute('data-img')}`, -2);
-  });
-});
-
-// Adiciona eventos para as seleções estéticas
-document.querySelectorAll('.based-option').forEach(option => {
-  option.addEventListener('click', () => {
-    addOrReplaceCategoryImage('based-layer', `images/based/${option.getAttribute('data-img')}`, -1);
-  });
-});
-
-
-
-
-// Ensure the watermark layer exists
+// Ensure watermark exists
 function ensureWatermarkLayer() {
-  let watermarkLayer = document.getElementById('watermark-layer');
-  if (!watermarkLayer) {
-    // Create the watermark layer if it doesn't exist
-    watermarkLayer = document.createElement('img');
-    watermarkLayer.src = 'images/default/watermark.png'; // Path to your watermark image
-    watermarkLayer.id = 'watermark-layer';
-    watermarkLayer.classList.add('layer');
-    watermarkLayer.style.zIndex = 10; // Ensure it's on top
-    watermarkLayer.style.position = 'absolute'; // Position as overlay
-    watermarkLayer.style.width = '100%'; // Match avatar display width
-    watermarkLayer.style.height = '100%'; // Match avatar display height
-    watermarkLayer.style.top = '0'; // Align with the top of the avatar display
-    watermarkLayer.style.left = '0'; // Align with the left of the avatar display
-    avatarDisplay.appendChild(watermarkLayer);
-  }
+    let watermarkLayer = document.getElementById('watermark-layer');
+    if (!watermarkLayer) {
+        watermarkLayer = document.createElement('img');
+        watermarkLayer.src = 'images/default/watermark.png';
+        watermarkLayer.id = 'watermark-layer';
+        watermarkLayer.classList.add('layer');
+        watermarkLayer.style.zIndex = 10;
+        watermarkLayer.style.position = 'absolute';
+        watermarkLayer.style.width = '100%';
+        watermarkLayer.style.height = '100%';
+        watermarkLayer.style.top = '0';
+        watermarkLayer.style.left = '0';
+        avatarDisplay.appendChild(watermarkLayer);
+    }
 }
 
-// Function to remove layers but keep specific ones
+// Function to clear layers except background and watermark
 function clearLayersExceptBackgroundAndWatermark() {
-  document.querySelectorAll('.layer').forEach(layer => {
-    if (!layer.id.includes('background') && layer.id !== 'watermark-layer') {
-      layer.remove();
-    }
-  });
-}
-
-// Ensure the watermark layer persists after randomization
-generateBtn.addEventListener('click', () => {
-  clearLayersExceptBackgroundAndWatermark();
-  ensureWatermarkLayer();
-});
-
-// Ensure the watermark is present after reset
-defaultBtn.addEventListener('click', () => {
-  setDefaultAvatar();
-  ensureWatermarkLayer();
-});
-
-// Ensure watermark exists on page load
-window.addEventListener('load', () => {
-  setDefaultAvatar();
-  ensureWatermarkLayer();
-});
-
-
-
-
-
-// Event for the randomization button
-generateBtn.addEventListener('click', () => {
-  // Function to get a random item with a chance of being null
-  const getRandomWithChance = (category, chance = 0) => {
-    // If the random chance is lower than the provided value, return null
-    if (Math.random() < chance) {
-      return null; // Leave the category empty
-    }
-    return category[Math.floor(Math.random() * category.length)]; // Return a random item
-  };
-
-  // Randomize values for all accessory categories
-  const randomFront = getRandomWithChance(accessories.front, 0); // 20% chance to be empty
-  const randomHat = getRandomWithChance(accessories.hats,0);  // 30% chance to be empty
-  const randomGlasses = getRandomWithChance(accessories.glasses,0);
-  const randomClothes = getRandomWithChance(accessories.clothes, 0);
-  const randomMouth = getRandomWithChance(accessories.mouth, 0);
-  const randomBased = getRandomWithChance(accessories.based, 0.6); // No chance to be empty
-  const randomCores = getRandomWithChance(accessories.cores, 0); // No chance to be empty
-
-  // Remove previous layers but keep the background and watermark
-document.querySelectorAll('.layer').forEach(layer => {
-  if (!layer.id.includes('background') && layer.id !== 'watermark-layer') {
-    layer.remove();
-  }
- 
-    
-  });
-
-  // Apply random selections for all categories, including "based" and "cores"
-  if (randomFront) addOrReplaceCategoryImage('front-layer', `images/front/${randomFront}`, 3);
-  if (randomHat) addOrReplaceCategoryImage('hat-layer', `images/hats/${randomHat}`, 6);
-  if (randomGlasses) addOrReplaceCategoryImage('eye-layer', `images/glasses/${randomGlasses}`, 4);
-  if (randomClothes) addOrReplaceCategoryImage('clothes-layer', `images/clothes/${randomClothes}`, 5);
-  if (randomMouth) addOrReplaceCategoryImage('mouth-layer', `images/mouth/${randomMouth}`, 7);
-  if (randomBased) addOrReplaceCategoryImage('based-layer', `images/based/${randomBased}`, 2);
-  if (randomCores) addOrReplaceCategoryImage('cores-layer', `images/cores/${randomCores}`, 1);
-});
-
-// Function to add or replace a category image in a layer
-function addOrReplaceCategoryImage(category, imgSrc, zIndex = 1) {
-  let existingImg = document.getElementById(category);
-
-  // Create the layer if it doesn't exist
-  if (!existingImg) {
-    const img = document.createElement('img');
-    img.src = imgSrc;
-    img.id = category;
-    img.classList.add('layer');
-    img.style.zIndex = zIndex;
-    avatarDisplay.appendChild(img);
-    return img; // Return the created image
-  } else {
-    existingImg.src = imgSrc;
-    return existingImg; // Return the existing image
-  }
-}
-
-// Função de reset, caso o usuário clique em "reset"
-defaultBtn.addEventListener('click', () => {
-  setDefaultAvatar();
-  // Quando o reset é chamado, garantir que o fundo padrão seja aplicado.
-  addOrReplaceCategoryImage('background-layer', "images/default/default_background.png", -5);
-});
-
-document.getElementById('download-btn').addEventListener('click', async () => {
-  const avatarDisplay = document.querySelector('.avatar-display');
-
-  // Create a clone of the avatar display
-  const clone = avatarDisplay.cloneNode(true);
-  clone.style.position = 'absolute';
-  clone.style.margin = '0';
-  clone.style.borderRadius = '0';
-  clone.style.top = '-9999px';     // Move it off-screen
-  clone.style.left = '-9999px';
-  clone.style.width = '1500px';    // Set fixed width
-  clone.style.height = '500px';    // Set fixed height
-
-  document.body.appendChild(clone); // Add the clone to the DOM
-
-  try {
-    // Capture the clone with html2canvas
-    const canvas = await html2canvas(clone, {
-      width: 1500,
-      height: 500,
-      scale: 1,                // Capture at higher scale for better quality
-      useCORS: true,           // Handle cross-origin images
-      backgroundColor: null,   // Maintain transparency if applicable
+    document.querySelectorAll('.layer').forEach(layer => {
+        if (!layer.id.includes('background') && layer.id !== 'watermark-layer') {
+            layer.remove();
+        }
     });
+}
 
-    // Create the download link and trigger download
-    const dataURL = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.href = dataURL;
-    link.download = 'PINOZATION_COMPLETED.png';
-    link.click();
-  } catch (error) {
-    console.error('Error capturing the image:', error);
-  } finally {
-    // Clean up the clone
-    document.body.removeChild(clone);
-  }
+// Add or replace a category image in a layer
+function addOrReplaceCategoryImage(category, imgSrc, defaultZIndex = 1) {
+    let existingImg = document.getElementById(category);
+
+    // Use zIndex from configuration or fall back to default
+    const zIndex = layerZIndex[category.split('-')[0]] || defaultZIndex;
+
+    if (!existingImg) {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.id = category;
+        img.classList.add('layer');
+        img.style.zIndex = zIndex;
+        avatarDisplay.appendChild(img);
+    } else {
+        existingImg.src = imgSrc;
+        existingImg.style.zIndex = zIndex; // Ensure zIndex is updated
+    }
+}
+
+// Add click events for options
+Object.keys(accessories).forEach(category => {
+    const options = document.querySelectorAll(`.${category}-option`);
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const img = option.getAttribute('data-img');
+            if (img) {
+                addOrReplaceCategoryImage(`${category}-layer`, `images/${category}/${img}`);
+            }
+        });
+    });
+});
+generateBtn.addEventListener('click', () => {
+    clearLayersExceptBackgroundAndWatermark();
+    ensureWatermarkLayer();
+
+    Object.keys(accessories).forEach(category => {
+        const items = accessories[category]; // Obtem os itens da categoria
+        const probability = categoryProbabilities[category] || 1; // Padrão 100% de chance
+
+        // Verifica se deve incluir a categoria com base na probabilidade
+        if (Math.random() <= probability && items.length > 0) {
+            // Escolhe um item aleatório da categoria
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+            addOrReplaceCategoryImage(`${category}-layer`, `images/${category}/${randomItem}`);
+        } else {
+            console.log(`Categoria "${category}" não incluída devido à probabilidade.`);
+        }
+    });
 });
 
+// Download the avatar
+downloadBtn.addEventListener('click', async () => {
+    const clone = avatarDisplay.cloneNode(true);
+    clone.style.position = 'absolute';
+    clone.style.margin = '0';
+    clone.style.borderRadius = '0';
+    clone.style.top = '-9999px';
+    clone.style.left = '-9999px';
+    clone.style.width = '1500px';
+    clone.style.height = '500px';
+    document.body.appendChild(clone);
 
+    try {
+        const canvas = await html2canvas(clone, {
+            width: 1500,
+            height: 500,
+            scale: 1,
+            useCORS: true,
+            backgroundColor: null
+        });
 
+        const dataURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'PINOZATION_COMPLETED.png';
+        link.click();
+    } catch (error) {
+        console.error('Error capturing the image:', error);
+    } finally {
+        document.body.removeChild(clone);
+    }
+});
 
-  
+// Ensure defaults on load
+window.addEventListener('load', () => {
+    setDefaultAvatar();
+    ensureWatermarkLayer();
+});
+
+// Reset to default on button click
+defaultBtn.addEventListener('click', () => {
+    setDefaultAvatar();
+    ensureWatermarkLayer();
+});
