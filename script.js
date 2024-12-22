@@ -54,9 +54,9 @@ const accessories = {
 
 const categoryProbabilities = {
     front: 0,        // Always include (100% chance)
-    hats: 0.3,       // 70% chance to include
-    glasses: 0.5,    // 50% chance to include
-    clothes: 0.5,    // 90% chance to include
+    hats: 0.8,       // 70% chance to include
+    glasses: 0.8,    // 50% chance to include
+    clothes: 0.8,    // 90% chance to include
     mouth: 0.5,      // 80% chance to include
     cores: 0,        // Always include (100% chance)
     based: 0.5,         // Always include (100% chance)
